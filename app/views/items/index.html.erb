@@ -1,0 +1,8 @@
+<% if @items.any? %>
+  <% @items.each do |item| %>
+    <%= item.name %>
+  <% end %>
+<% else %>
+  <p>No items have been added to the site yet.</p>
+  <%= link_to 'Add a new Item', new_item_path %>
+<% end %>
