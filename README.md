@@ -14,10 +14,12 @@ Javascript/jQuery on the front-end (planned)
 
 ## Job List
 
-- [ ] Set up the Rails App
-- [ ] Add Users and logins (using Devise)
+- [x] Set up the Rails App
 - [ ] Set up Product Model which takes a cost, details and photo
+- [ ] Ensure flash errors/notice are being displayed
+- [ ] Add Users and logins (using Devise)
 - [ ] Allow Users to upload photos of their product for sale
+- [ ] Ensure Header for each is set up in layout (logo and nav bar)
 
 ## Favourite Code Snippet
 
