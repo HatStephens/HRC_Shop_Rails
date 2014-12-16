@@ -44,6 +44,14 @@ describe 'Items' do
       expect(page).to_not have_link 'Edit'
     end
 
+    it 'can be deleted by the owner' do
+      sign_in('phil@hrc.com', 'testtest')
+      click_link 'Orlando Guitar'
+      click_link 'Delete'
+      expect(page).to have_content 'Your pin has been removed successfully'
+      expect(current_path).to eq '/'
+    end
+
   end
 
   context 'can be added' do

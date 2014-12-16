@@ -33,6 +33,13 @@ class ItemsController < ApplicationController
     redirect_to "/items/#{@item.id}"
   end
 
+  def destroy
+    @item = Item.find(params[:id])
+    @item.destroy
+    flash[:notice] = "Your pin has been removed successfully"
+    redirect_to '/'
+  end
+
 end
 
 def item_params

@@ -18,6 +18,7 @@
   <% if current_user.id == @item.user_id %>
     <section>
       <%= link_to 'Edit', edit_item_path %>
+      <%= link_to "Delete", item_path, method: :delete %>
     </section>
   <% end %>
 <% end %>
