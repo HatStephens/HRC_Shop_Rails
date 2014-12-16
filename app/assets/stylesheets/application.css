@@ -12,4 +12,10 @@
  *
  *= require_tree .
  *= require_self
+ *= require pure
  */
+
+
+nav {
+  background-color: salmon;
+}

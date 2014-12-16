@@ -1,8 +1,14 @@
 <% if @items.any? %>
   <% @items.each do |item| %>
+    <section>
     <%= item.name %>
+    <%= image_tag item.photo.url(:thumb) %>
+    </section>
   <% end %>
 <% else %>
   <p>No items have been added to the site yet.</p>
+<% end %>
+
+<% if current_user %>
   <%= link_to 'Add a new Item', new_item_path %>
 <% end %>

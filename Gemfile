@@ -38,5 +38,10 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'aws-sdk'
+gem 'devise'
+gem 'paperclip'
+gem 'pure-css-rails'
+
 gem 'rspec-rails', group: :test
 gem 'capybara', group: :test
