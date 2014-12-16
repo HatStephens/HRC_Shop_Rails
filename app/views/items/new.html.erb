@@ -1,42 +1,6 @@
 <% if current_user %>
-<br/>
-<%= form_for @item, html: {class: 'pure-form pure-form-aligned', multipart: true} do |f| %>
-<section class='pure-control-group'>
-  <%= f.label :name %>
-  <%= f.text_field :name, size: "60", placeholder: '50 character limit' %><br/>
-</section>
-<section class='pure-control-group'>
-  <%= f.label :description %>
-  <%= f.text_area :description, size: "", placeholder: '250 character limit', class: 'pure-input-2-3'%><br/>
-</section>
-<section class='pure-control-group'>
-  <%= f.label :location %>
-  <%= f.text_field :location, size: "60", placeholder: 'e.g. Paris' %>
-</section>
-<section class='pure-control-group'>
-  <%= f.label :price %>
-  <%= f.text_field :price, size: "60", placeholder: 'Number only (US$)' %>
-</section>
-<section class='pure-control-group'>
-  <%= f.label :Pin_Catalog_Number %>
-  <%= f.text_field :PCNumber, size: "60", placeholder: 'HRC Pin Catalog Number (if known)' %>
-</section>
-<section class='pure-control-group'>
-  <%= f.label :Pin_Catalog_Value %>
-  <%= f.text_field :PCValue, size: "60", placeholder: 'HRC Pin Catalog Value (if known)' %>
-</section>
-<section class='pure-control-group'>
-  <%= f.label :year %>
-  <%= f.text_field :year, size: "60", placeholder: 'Year of Issue (if known)' %>
-</section>
-<section class='pure-control-group'>
-  <%= f.label :photo %>
-  <%= f.file_field :photo %>
-</section>
-<section class="pure-controls">
-  <%= f.submit 'Submit Item', class: 'pure-button pure-button-primary' %>
-</section>
-<% end %>
+  <br/>
+  <%= render "form" %>
 <% else %>
- <p>You must be registered to list a new pin</p>
+  <p>You must be registered to list a new pin</p>
 <% end %>

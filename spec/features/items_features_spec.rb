@@ -15,12 +15,33 @@ describe 'Items' do
   context 'have been added' do
 
     before do
-      Item.create(name: 'Orlando Guitar', user_id: 1)
+      @item = Item.create(name: 'Orlando Guitar', user_id: 100)
+      @user = User.create(email: 'phil@hrc.com', password: 'testtest', id: 100)
     end
 
-    it 'should be displayed on the screen' do
+    it 'should be displayed on the home page' do
       visit '/'
       expect(page).to have_content 'Orlando Guitar'
+    end
+
+    it 'should link to full details' do
+      visit '/'
+      click_link 'Orlando Guitar'
+      expect(page).to have_content 'Orlando Guitar'
+      expect(current_path).to eq "/items/#{@item.id}"
+    end
+
+    it 'can be edited by the owner' do
+      sign_in('phil@hrc.com', 'testtest')
+      click_link 'Orlando Guitar'
+      click_link 'Edit'
+      expect(page).to have_content 'Edit Orlando Guitar'
+    end
+
+    it 'cannot be edited by the owner' do
+      visit '/'
+      click_link 'Orlando Guitar'
+      expect(page).to_not have_link 'Edit'
     end
 
   end
@@ -54,7 +75,7 @@ describe 'Items' do
       attach_file 'Photo', 'spec/helpers/cow.jpg'
       click_button 'Submit Item'
 
-      expect(page).to have_selector("img[alt='Cgit aow']")
+      expect(page).to have_selector("img[alt='Cow']")
     end
 
   end

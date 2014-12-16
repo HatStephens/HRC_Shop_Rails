@@ -1,0 +1,23 @@
+<h1><%= @item.name %></h1>
+<section>
+  <%= image_tag @item.photo.url(:medium) %>
+  <p>Price:<%= @item.price %></p>
+</section>
+<section>
+  <p>Description:<%= @item.description %></p>
+  <p>Location:<%= @item.location %></p>
+  <p>Year:<%= @item.year %></p>
+  <% if @item.PCNumber %>
+    <p>Pin Catalog Number:<%= @item.PCNumber %></p>
+  <% end %>
+  <% if @item.PCValue %>
+    <p>Pin Catalog Value:<%= @item.PCValue %></p>
+  <% end %>
+</section>
+<% if current_user %>
+  <% if current_user.id == @item.user_id %>
+    <section>
+      <%= link_to 'Edit', edit_item_path %>
+    </section>
+  <% end %>
+<% end %>

@@ -1,0 +1,10 @@
+<% if current_user %>
+  <% if current_user.id == @item.user_id %>
+    <p>Edit <%= @item.name %></p>
+    <%= render "form" %>
+  <% else %>
+    <p>You are not allowed to edit this item</p>
+  <% end %>
+<% else %>
+  <p>You must be logged in (and the owner) to edit this page.</p>
+<% end %>
