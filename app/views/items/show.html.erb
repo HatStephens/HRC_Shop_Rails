@@ -1,5 +1,8 @@
 <h1><%= @item.name %></h1>
 <section>
+  <h3><%= link_to 'Contact Seller', contact_path, :target => "_blank" %></h3>
+</section>
+<section>
   <%= image_tag @item.photo.url(:medium) %>
   <p>Price:<%= @item.price %></p>
 </section>

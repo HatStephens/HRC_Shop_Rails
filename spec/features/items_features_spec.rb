@@ -17,6 +17,7 @@ describe 'Items' do
     before do
       @item = Item.create(name: 'Orlando Guitar', user_id: 100)
       @user = User.create(email: 'phil@hrc.com', password: 'testtest', id: 100)
+      @user = User.create(email: 'jimi@hrc.com', password: 'testtest', id: 200)
     end
 
     it 'should be displayed on the home page' do
@@ -38,8 +39,8 @@ describe 'Items' do
       expect(page).to have_content 'Edit Orlando Guitar'
     end
 
-    it 'cannot be edited by the owner' do
-      visit '/'
+    it 'cannot be edited by other users' do
+      sign_in('jimi@hrc.com', 'testtest')
       click_link 'Orlando Guitar'
       expect(page).to_not have_link 'Edit'
     end
@@ -50,6 +51,12 @@ describe 'Items' do
       click_link 'Delete'
       expect(page).to have_content 'Your pin has been removed successfully'
       expect(current_path).to eq '/'
+    end
+
+    it 'cannot be deleted by other users' do
+      sign_in('jimi@hrc.com', 'testtest')
+      click_link 'Orlando Guitar'
+      expect(page).to_not have_content 'Delete'
     end
 
   end
