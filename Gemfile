@@ -42,6 +42,7 @@ gem 'aws-sdk'
 gem 'devise'
 gem 'paperclip'
 gem 'pure-css-rails'
+gem 'rails_12factor'
 
 gem 'rspec-rails', group: :test
 gem 'capybara', group: :test
