@@ -7,32 +7,34 @@
   <%= csrf_meta_tags %>
 </head>
 
-<body>
+<body class="wrapper">
   <header>
     <section id="logo">
       <%= link_to image_tag("logo_100x70wh.png"), root_path %>
     </section>
     <nav>
       <% if current_user %>
-        <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-        <p>Welcome, <%= current_user.email %></p>
+        <section class="signedin">
+          <%= link_to "Sign Out", destroy_user_session_path, :method => :delete, class: "sign" %>
+        </section>
+          <p class="welcome">Welcome, <%= current_user.email %></p>
       <% else %>
         <section class="signinup">
           <%= link_to "Sign Up", new_user_registration_path, class: "sign" %>
           <%= link_to "Sign In", new_user_session_path, class: "sign" %>
         </section>
-        <p class="membership">You currently only need membership to sell your pins, not to purchase them.</p>
+        <p class="membership">Currently, you only need membership to sell your pins, not to purchase them.</p>
       <% end %>
     </nav>
   </header>
-
-  <section class='messages'>
-    <%= notice %>
-    <%= alert %>
-  </section>
-
-  <section>
-    <%= yield %>
+  <section class="main">
+    <section class="notices">
+      <%= notice %>
+      <%= alert %>
+    </section>
+    <section>
+      <%= yield %>
+    </section>
   </section>
 </body>
 </html>
