@@ -15,7 +15,45 @@
  *= require pure
  */
 
+/*================
+  HEADER & NAV BAR
+================*/
+
+header {
+  background-color: black;
+  width: 100%;
+  height: 80px;
+}
+
+#logo {
+  float: left;
+  margin-right: 10px;
+}
 
 nav {
-  background-color: salmon;
+  float: right;
+  /*background-color: salmon;*/
+ /* display: inline;*/
+}
+
+.sign {
+  text-decoration: none;
+  float: right;
+  margin-right: 15px;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.membership {
+  color: #aaa;
+  font-size: 0.8em;
+  font-style: oblique;
+}
+
+/*================
+  BODY
+================*/
+
+body {
+  background-color: #aaa;
 }

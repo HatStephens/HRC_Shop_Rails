@@ -9,16 +9,19 @@
 
 <body>
   <header>
-    <section>
+    <section id="logo">
+      <%= link_to image_tag("logo_100x70wh.png"), root_path %>
     </section>
     <nav>
       <% if current_user %>
         <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
         <p>Welcome, <%= current_user.email %></p>
       <% else %>
-        <%= link_to "Sign Up", new_user_registration_path %>
-        <%= link_to "Sign In", new_user_session_path %>
-        <p>You currently only need membership to sell your pins, not to purchase them.</p>
+        <section class="signinup">
+          <%= link_to "Sign Up", new_user_registration_path, class: "sign" %>
+          <%= link_to "Sign In", new_user_session_path, class: "sign" %>
+        </section>
+        <p class="membership">You currently only need membership to sell your pins, not to purchase them.</p>
       <% end %>
     </nav>
   </header>
