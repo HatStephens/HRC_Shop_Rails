@@ -2,15 +2,28 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
+
     if params[:search]
       @filtered_items = []
+
       @items.each do |item|
-        @filtered_items << item if (item.location == params[:search][:location])
+        if (params[:search][:location] != 'n/a' && params[:search][:occasion] != 'n/a')
+          @filtered_items << item if filter_both(item, params[:search])
+        else
+          @filtered_items << item if filter_location(item, params[:search])
+          @filtered_items << item if filter_occasion(item, params[:search])
+        end
       end
-      @items = @filtered_items
-    else
-      @items = Item.all
+
+      if @filtered_items.empty?
+        @items = Item.all
+        flash[:notice] = "Sorry, no items match your Search criteria."
+      else
+        @items = @filtered_items.uniq
+        flash[:notice] = ''
+      end
     end
+
   end
 
   def new
@@ -53,5 +66,22 @@ class ItemsController < ApplicationController
 end
 
 def item_params
-  params.require(:item).permit(:name, :description, :location, :PCNumber, :PCValue, :year, :price, :photo)
+  params.require(:item).permit(:name, :description, :location, :PCNumber, :PCValue, :year, :price, :photo, :occasion)
+end
+
+
+def filter_both(item, params)
+  location = params[:location]
+  occasion = params[:occasion]
+  check_both = true if (item.location == location && item.occasion == occasion)
+end
+
+def filter_location(item, params)
+  location = params[:location]
+  check_location = true if (item.location == location)
+end
+
+def filter_occasion(item, params)
+  occasion = params[:occasion]
+  check_occasion = true if (item.occasion == occasion)
 end

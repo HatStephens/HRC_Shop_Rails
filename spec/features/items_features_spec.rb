@@ -97,9 +97,9 @@ describe 'Items' do
 
   context 'can be filtered' do
     before do
-      @item_one = Item.create(name: 'test_one', location: 'London', user_id: 100)
-      @item_two = Item.create(name: 'test_two', location: 'London', user_id: 100)
-      @item_three = Item.create(name: 'test_three', location: 'Paris', user_id: 100)
+      @item_one = Item.create(name: 'test_one', location: 'London', occasion: 'Christmas', user_id: 100)
+      @item_two = Item.create(name: 'test_two', location: 'London', occasion: 'Anniversary', user_id: 100)
+      @item_three = Item.create(name: 'test_three', location: 'Paris', occasion: 'Staff', user_id: 100)
     end
 
     it 'by location' do
@@ -107,6 +107,23 @@ describe 'Items' do
       select 'Paris', from: 'search[location]'
       click_button 'Search'
       expect(page).to_not have_content 'test_one'
+      expect(page).to have_content 'test_three'
+    end
+
+    it 'by occasion' do
+      visit '/'
+      select 'Christmas', from: 'search[occasion]'
+      click_button 'Search'
+      expect(page).to_not have_content 'test_two'
+      expect(page).to have_content 'test_one'
+    end
+
+    it 'by location and occasion' do
+      visit '/'
+      select 'Paris', from: 'search[location]'
+      select 'Staff', from: 'search[occasion]'
+      click_button 'Search'
+      expect(page).to_not have_content 'test_two'
       expect(page).to have_content 'test_three'
     end
   end

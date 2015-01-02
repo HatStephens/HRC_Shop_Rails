@@ -9,7 +9,11 @@
   </section>
   <section class='pure-control-group'>
     <%= f.label :location %>
-    <%= f.text_field :location, size: "60", placeholder: 'e.g. Paris' %>
+    <%= f.collection_select :location, Item::LOCATIONS, :to_s, :titleize %>
+  </section>
+  <section class='pure-control-group'>
+    <%= f.label :occasion %>
+    <%= f.collection_select :occasion, Item::OCCASIONS, :to_s, :titleize %>
   </section>
   <section class='pure-control-group'>
     <%= f.label :price %>
