@@ -14,22 +14,25 @@
         <%= submit_tag "Search", :name => nil %>
       </section>
     <% end %>
+    <% if current_user %>
+      <%= link_to 'Add a new Item', new_item_path %>
+    <% end %>
   </section>
 
   <section class="midcol">
     <% if @items.any? %>
       <% @items.each do |item| %>
-        <section>
-          <%= link_to item.name, item %>
-          <%= image_tag item.photo.url(:thumb) %>
+        <section class="item_image">
+          <p class="item_name">
+            <%= link_to item.name, item, class: "item_name" %>
+          </p>
+          <p class="image_thumb">
+            <%= image_tag item.photo.url(:thumb) %>
+          </p>
         </section>
       <% end %>
     <% else %>
       <p>No items have been added to the site yet.</p>
-    <% end %>
-
-    <% if current_user %>
-      <%= link_to 'Add a new Item', new_item_path %>
     <% end %>
   </section>
 
