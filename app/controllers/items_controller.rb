@@ -2,6 +2,15 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all
+    if params[:search]
+      @filtered_items = []
+      @items.each do |item|
+        @filtered_items << item if (item.location == params[:search][:location])
+      end
+      @items = @filtered_items
+    else
+      @items = Item.all
+    end
   end
 
   def new

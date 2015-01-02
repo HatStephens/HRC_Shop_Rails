@@ -16,8 +16,8 @@ describe 'Items' do
 
     before do
       @item = Item.create(name: 'Orlando Guitar', user_id: 100)
-      @user = User.create(email: 'phil@hrc.com', password: 'testtest', id: 100)
-      @user = User.create(email: 'jimi@hrc.com', password: 'testtest', id: 200)
+      @userone = User.create(email: 'phil@hrc.com', password: 'testtest', id: 100)
+      @usertwo = User.create(email: 'jimi@hrc.com', password: 'testtest', id: 200)
     end
 
     it 'should be displayed on the home page' do
@@ -93,6 +93,22 @@ describe 'Items' do
       expect(page).to have_selector("img[alt='Cow']")
     end
 
+  end
+
+  context 'can be filtered' do
+    before do
+      @item_one = Item.create(name: 'test_one', location: 'London', user_id: 100)
+      @item_two = Item.create(name: 'test_two', location: 'London', user_id: 100)
+      @item_three = Item.create(name: 'test_three', location: 'Paris', user_id: 100)
+    end
+
+    it 'by location' do
+      visit '/'
+      select 'Paris', from: 'search[location]'
+      click_button 'Search'
+      expect(page).to_not have_content 'test_one'
+      expect(page).to have_content 'test_three'
+    end
   end
 
 end

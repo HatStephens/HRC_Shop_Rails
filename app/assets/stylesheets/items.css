@@ -1,0 +1,24 @@
+// Place all the styles related to the items controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.indexwrap {
+  width: 100%;
+}
+
+.leftcol {
+  width: 200px;
+  /*height: 1000px;*/
+  float: left;
+  border-right: 2px solid black;
+  padding: 4px;
+  margin: 0px;
+}
+
+h3 {
+  padding: 0px;
+}
+
+.midcol {
+  float: left;
+}

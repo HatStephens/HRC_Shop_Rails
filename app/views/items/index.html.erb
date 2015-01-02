@@ -1,14 +1,32 @@
-<% if @items.any? %>
-  <% @items.each do |item| %>
-    <section>
-    <%= link_to item.name, item %>
-    <%= image_tag item.photo.url(:thumb) %>
-    </section>
-  <% end %>
-<% else %>
-  <p>No items have been added to the site yet.</p>
-<% end %>
+<section "indexwrap">
+  <section class="leftcol">
+    <h3>Search Pins</h3>
+    <%= form_tag items_path, :method => 'get', html: {class: 'pure-form pure-form-aligned', multipart: true} do %>
+      <section class='pure-control-group'>
+        <%= label_tag :location %>
+        <%= collection_select(:search, :location, Item.all, :location, :location) %>
+      </section>
+      <section class='pure-controls'>
+        <%= submit_tag "Search", :name => nil %>
+      </section>
+    <% end %>
+  </section>
 
-<% if current_user %>
-  <%= link_to 'Add a new Item', new_item_path %>
-<% end %>
+  <section class="midcol">
+    <% if @items.any? %>
+      <% @items.each do |item| %>
+        <section>
+          <%= link_to item.name, item %>
+          <%= image_tag item.photo.url(:thumb) %>
+        </section>
+      <% end %>
+    <% else %>
+      <p>No items have been added to the site yet.</p>
+    <% end %>
+
+    <% if current_user %>
+      <%= link_to 'Add a new Item', new_item_path %>
+    <% end %>
+  </section>
+
+</section>
