@@ -8,7 +8,7 @@
 }
 
 .leftcol {
-  width: 200px;
+  width: 250px;
   height: 1000px;
   float: left;
   border-right: 2px solid black;
@@ -50,5 +50,19 @@ h3 {
 }
 
 a.item_name:hover {
+  text-decoration: underline;
+}
+
+.no_match {
+  padding-left: 10px;
+  color: red;
+}
+
+.addnew {
+  text-decoration: none;
+  color: black;
+}
+
+.addnew:hover {
   text-decoration: underline;
 }

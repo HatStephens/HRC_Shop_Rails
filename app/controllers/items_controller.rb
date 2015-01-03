@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all
 
-    if params[:search]
+    if params[:search] && params[:keywordsearch]==""
       @filtered_items = []
 
       @items.each do |item|
@@ -16,8 +16,25 @@ class ItemsController < ApplicationController
       end
 
       if @filtered_items.empty?
-        @items = Item.all
-        flash[:notice] = "Sorry, no items match your Search criteria."
+        @items = []
+        # flash[:notice] = "Sorry, no items match your Search criteria."
+      else
+        @items = @filtered_items.uniq
+        flash[:notice] = ''
+      end
+    end
+
+    if params[:keywordsearch]
+      @filtered_items = []
+
+      @items.each do |item|
+        @filtered_items << item if item.name.include? "#{params[:keywordsearch]}"
+      end
+      # @filtered_items = Item.where(:all, :conditions => ['name LIKE ?', "%#{params[:keywordsearch]}%"])
+
+      if @filtered_items.empty?
+        @items = []
+        # flash[:notice] = "Sorry, no items match your Search criteria."
       else
         @items = @filtered_items.uniq
         flash[:notice] = ''
@@ -25,6 +42,7 @@ class ItemsController < ApplicationController
     end
 
   end
+
 
   def new
     @item = Item.new
