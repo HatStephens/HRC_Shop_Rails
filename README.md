@@ -3,7 +3,7 @@ HRC Shop in Rails
 
 ## Synopsis
 
-Rather than re-create Instagram, I have opted to create a shop (so sticking with the idea of users uploading images) whilst also providing me a platform to test Stripe. This will be my third Rails project.
+This is a project I am working on since finishing at Makers Academy to continue getting used to Rails. The aim is to try and create a type of market place similar to www.stillwhite.co.uk for people to sell (or trade) Hard Rock Cafe Pins. I also want to use this to as a platform to practice my front-end work and look at using more advanced CSS.
 
 ## Technologies Used
 
@@ -15,11 +15,12 @@ Javascript/jQuery on the front-end (planned)
 ## Job List
 
 - [x] Set up the Rails App
-- [ ] Set up Product Model which takes a cost, details and photo
+- [x] Set up Product Model which takes a cost, details and photo
 - [ ] Ensure flash errors/notice are being displayed
-- [ ] Add Users and logins (using Devise)
-- [ ] Allow Users to upload photos of their product for sale
+- [x] Add Users and logins (using Devise)
+- [x] Allow Users to upload photos of their product for sale
 - [ ] Ensure Header for each is set up in layout (logo and nav bar)
+- [x] Produce a search/filter system
 
 ## Favourite Code Snippet
 
@@ -29,8 +30,8 @@ Javascript/jQuery on the front-end (planned)
 
 ## Collaborators
 
+None.
 
 ## Still to complete/refactor
 
-- [ ]
-- [ ]
+Project still on-going.
