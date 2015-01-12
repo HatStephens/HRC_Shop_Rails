@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
       @filtered_items = []
 
       @items.each do |item|
-        @filtered_items << item if item.name.include? "#{params[:keywordsearch]}"
+        @filtered_items << item if item.name.downcase.include? "#{params[:keywordsearch].downcase}"
       end
       # @filtered_items = Item.where(:all, :conditions => ['name LIKE ?', "%#{params[:keywordsearch]}%"])
 

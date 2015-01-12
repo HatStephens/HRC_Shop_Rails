@@ -15,6 +15,11 @@
  *= require pure
  */
 
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 body {
    min-width: 600px;
    /*background-color: #aaa;*/
@@ -26,7 +31,7 @@ body {
 
 header {
   background-color: black;
-  width: 100%;
+  width: auto;
   height: 85px;
   margin: 0px;
 }
@@ -82,8 +87,9 @@ nav {
 ================*/
 
 .main {
-  width: 100%;
+  width: auto;
   margin: 0px;
+  overflow: hidden;
 }
 
 .notices {
@@ -91,4 +97,5 @@ nav {
   width: 200px;
   text-align: center;
   margin: 2px auto 2px auto;
+  overflow: hidden;
 }

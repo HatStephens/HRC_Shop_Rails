@@ -1,8 +1,5 @@
 <section "indexwrap">
   <section class="leftcol">
-    <% if current_user %>
-      <%= link_to 'Add a new Item', new_item_path, class:"addnew" %>
-    <% end %>
     <h3>Search Pins</h3>
     <%= form_tag items_path, :method => 'get', html: {class: 'pure-form pure-form-aligned', multipart: true} do %>
       <section class='pure-control-group'>
@@ -21,11 +18,23 @@
         <%= label_tag :keyword %>
         <%= text_field_tag :keywordsearch, params[:keywordsearch] %>
       </section>
+      <br/>
       <section class='pure-controls'>
         <%= submit_tag "Search", :name => nil %>
       </section>
     <% end %>
+
+    <section class="userarea">
+      <h3>Admin</h3>
+      <% if current_user %>
+        <p><%= link_to 'Add a new Item', new_item_path, class:"addnew" %></p>
+        <p><%= link_to 'Manage My Listed Pins', users_mylisted_path, class:"addnew" %></p>
+      <% end %>
+    </section>
+
   </section>
+
+
 
   <section class="midcol">
     <% if @items.any? %>
@@ -39,10 +48,13 @@
           </p>
         </section>
       <% end %>
+
     <% else %>
       <p class="no_match">Sorry, no items match your Search criteria.</p>
-      <%= params.inspect %>
     <% end %>
+
   </section>
+
+
 
 </section>

@@ -17,6 +17,7 @@
     <p>Pin Catalog Value:<%= @item.PCValue %></p>
   <% end %>
 </section>
+
 <% if current_user %>
   <% if current_user.id == @item.user_id %>
     <section>

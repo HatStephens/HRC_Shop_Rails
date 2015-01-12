@@ -7,7 +7,7 @@ describe 'Items' do
 
     it 'should display a message saying no items added' do
       visit '/'
-      expect(page).to have_content 'No items have been added to the site yet.'
+      expect(page).to have_content 'Sorry, no items match your Search criteria.'
     end
 
   end
@@ -125,6 +125,14 @@ describe 'Items' do
       click_button 'Search'
       expect(page).to_not have_content 'test_two'
       expect(page).to have_content 'test_three'
+    end
+
+    it 'by a keyword' do
+      visit '/'
+      fill_in 'keywordsearch', with: 'two'
+      click_button 'Search'
+      expect(page).to_not have_content 'test_one'
+      expect(page).to have_content 'test_two'
     end
   end
 
