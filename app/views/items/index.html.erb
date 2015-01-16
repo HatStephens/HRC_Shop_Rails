@@ -4,16 +4,14 @@
     <%= form_tag items_path, :method => 'get', html: {class: 'pure-form pure-form-aligned', multipart: true} do %>
       <section class='pure-control-group'>
         <%= label_tag :location %>
-        <%= collection_select(:search, :location, Item::LOCATIONS, :to_s, :titleize) %>
+        <%= collection_select(:search, :location, Item::LOCATIONS, :to_s, :titleize, prompt: (@location ? params[:search][:location] : 'n/a')) %>
       </section>
       <br/>
       <section class='pure-control-group'>
         <%= label_tag :occasion %>
-        <%= collection_select(:search, :occasion, Item::OCCASIONS, :to_s, :titleize) %>
+        <%= collection_select(:search, :occasion, Item::OCCASIONS, :to_s, :titleize, prompt: (@occasion ? params[:search][:occasion] : 'n/a')) %>
       </section>
-      <p>
-        Or type a keyword:
-      </p>
+      <br/>
       <section class='pure-control-group'>
         <%= label_tag :keyword %>
         <%= text_field_tag :keywordsearch, params[:keywordsearch] %>
@@ -24,13 +22,15 @@
       </section>
     <% end %>
 
-    <section class="userarea">
-      <h3>Admin</h3>
-      <% if current_user %>
-        <p><%= link_to 'Add a new Item', new_item_path, class:"addnew" %></p>
-        <p><%= link_to 'Manage My Listed Pins', users_mylisted_path, class:"addnew" %></p>
-      <% end %>
-    </section>
+    <% if current_user %>
+      <section class="userarea">
+        <h3>Admin</h3>
+        <% if current_user %>
+          <p><%= link_to 'Add a new Pin', new_item_path, class:"addnew" %></p>
+          <p><%= link_to 'Manage My Listed Pins', users_mylisted_path, class:"addnew" %></p>
+        <% end %>
+      </section>
+    <% end %>
 
   </section>
 
@@ -39,14 +39,16 @@
   <section class="midcol">
     <% if @items.any? %>
       <% @items.each do |item| %>
-        <section class="item_image">
-          <p class="item_name">
-            <%= link_to item.name, item, class: "item_name" %>
-          </p>
-          <p class="image_thumb">
-            <%= image_tag item.photo.url(:thumb) %>
-          </p>
-        </section>
+        <%= link_to item do %>
+          <section class="item_image">
+            <p class="item_name">
+              <%= item.name %> (<%= item.location.humanize.titleize %>)
+            </p>
+            <p class="image_thumb">
+              <%= image_tag item.photo.url(:thumb) %>
+            </p>
+          </section>
+        <% end %>
       <% end %>
 
     <% else %>

@@ -1,7 +1,9 @@
 <ul>
   <% @my_items.each do |item| %>
     <li><%= item.name %>
-      <li><%= link_to 'Edit', edit_item_path(item) %><%= link_to "Delete", item_path(item), method: :delete %></li>
+      <ul>
+        <li><%= link_to 'Edit', edit_item_path(item) %> <%= link_to "Delete", item_path(item), method: :delete, data: {confirm: "Are you sure?"} %></li>
+      </ul>
     </li>
   <% end %>
 </ul>

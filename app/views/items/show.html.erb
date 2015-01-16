@@ -1,28 +1,48 @@
-<h1><%= @item.name %></h1>
-<section>
-  <h3><%= link_to 'Contact Seller', contact_path, :target => "_blank" %></h3>
-</section>
-<section>
-  <%= image_tag @item.photo.url(:medium) %>
-  <p>Price:<%= @item.price %></p>
-</section>
-<section>
-  <p>Description:<%= @item.description %></p>
-  <p>Location:<%= @item.location %></p>
-  <p>Year:<%= @item.year %></p>
-  <% if @item.PCNumber %>
-    <p>Pin Catalog Number:<%= @item.PCNumber %></p>
-  <% end %>
-  <% if @item.PCValue %>
-    <p>Pin Catalog Value:<%= @item.PCValue %></p>
-  <% end %>
-</section>
+<section class='indexwrap'>
 
-<% if current_user %>
-  <% if current_user.id == @item.user_id %>
-    <section>
-      <%= link_to 'Edit', edit_item_path %>
-      <%= link_to "Delete", item_path, method: :delete %>
+  <section class='leftcol'>
+    <section class='contact_link_holder'>
+      <section class='contact_button'>
+        <%= link_to contact_path, :target => "_blank", class:'contact_link' do %>
+          <h3 class='contact_text'>Contact Seller</h3>
+        <% end %>
+      </section>
     </section>
-  <% end %>
-<% end %>
+    <section class='key_info'>
+      <p><strong>Price:</strong> $<%= @item.price %></p>
+      <p><strong>Location:</strong> <%= @item.location %></p>
+      <p><strong>Occasion:</strong> <%= @item.occasion %></p>
+      <p><strong>Year:</strong> <%= @item.year %></p>
+      <% if @item.PCNumber %>
+        <p><strong>Pin Catalog Number:</strong> <%= @item.PCNumber %></p>
+      <% end %>
+      <% if @item.PCValue %>
+        <p><strong>Pin Catalog Value:</strong> $<%= @item.PCValue %></p>
+      <% end %>
+    </section>
+    <% if current_user %>
+      <% if current_user.id == @item.user_id %>
+        <section class='userarea'>
+          <%= link_to 'Edit', edit_item_path %>
+          <%= link_to "Delete", item_path, method: :delete %>
+        </section>
+      <% end %>
+    <% end %>
+  </section>
+
+  <section class='midcol'>
+    <section class='item_name_show'>
+      <h1><%= @item.name %></h1>
+    </section>
+
+    <section class='image_medium_holder'>
+      <%= image_tag @item.photo.url(:medium), class:'image_medium' %>
+    </section>
+    <section>
+
+      <p class='description'><strong>Description:</strong> <%= @item.description %></p>
+
+    </section>
+
+  </section>
+</section>

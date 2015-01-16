@@ -3,43 +3,30 @@ class ItemsController < ApplicationController
   def index
     @items = Item.all
 
-    if params[:search] && params[:keywordsearch]==""
-      @filtered_items = []
 
-      @items.each do |item|
-        if (params[:search][:location] != 'n/a' && params[:search][:occasion] != 'n/a')
-          @filtered_items << item if filter_both(item, params[:search])
-        else
-          @filtered_items << item if filter_location(item, params[:search])
-          @filtered_items << item if filter_occasion(item, params[:search])
-        end
+    if params[:search].present? || params[:keywordsearch].present?
+
+
+      if params[:search][:location].present?
+        @location = true
+        @items = @items.where(location: params[:search][:location])
       end
 
-      if @filtered_items.empty?
-        @items = []
-        # flash[:notice] = "Sorry, no items match your Search criteria."
-      else
-        @items = @filtered_items.uniq
-        flash[:notice] = ''
+      if params[:search][:occasion].present?
+        @occasion = true
+        @items = @items.where(occasion: params[:search][:occasion])
       end
+
+      if params[:keywordsearch].present?
+        @items = @items.where('name LIKE ?', "%#{params[:keywordsearch]}%")
+      end
+
     end
 
-    if params[:keywordsearch]
-      @filtered_items = []
-
-      @items.each do |item|
-        @filtered_items << item if item.name.downcase.include? "#{params[:keywordsearch].downcase}"
+      if @items.empty?
+        flash[:notice] = "Sorry, no items match your Search criteria."
       end
-      # @filtered_items = Item.where(:all, :conditions => ['name LIKE ?', "%#{params[:keywordsearch]}%"])
 
-      if @filtered_items.empty?
-        @items = []
-        # flash[:notice] = "Sorry, no items match your Search criteria."
-      else
-        @items = @filtered_items.uniq
-        flash[:notice] = ''
-      end
-    end
 
   end
 
@@ -85,21 +72,4 @@ end
 
 def item_params
   params.require(:item).permit(:name, :description, :location, :PCNumber, :PCValue, :year, :price, :photo, :occasion)
-end
-
-
-def filter_both(item, params)
-  location = params[:location]
-  occasion = params[:occasion]
-  check_both = true if (item.location == location && item.occasion == occasion)
-end
-
-def filter_location(item, params)
-  location = params[:location]
-  check_location = true if (item.location == location)
-end
-
-def filter_occasion(item, params)
-  occasion = params[:occasion]
-  check_occasion = true if (item.occasion == occasion)
 end
